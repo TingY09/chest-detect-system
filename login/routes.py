@@ -9,7 +9,8 @@ client = MongoClient('mongodb://localhost:27017/')
 db = client['doctor']
 collection = db['login']
 
-# 登入頁面路由
+
+# 主頁路由，返回 HTML 頁面
 @login_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':

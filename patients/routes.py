@@ -22,3 +22,4 @@ def get_patient_data(name):
             return "找不到病患資料", 404
     except Exception as e:
         return jsonify({'message': str(e), 'status': 'error'}), 500
+
