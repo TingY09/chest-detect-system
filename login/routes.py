@@ -9,6 +9,7 @@ client = MongoClient('mongodb://localhost:27017/')
 db = client['doctor']
 collection = db['login']
 
+
 # 主頁路由，返回 HTML 頁面
 @login_bp.route('/login', methods=['GET', 'POST'])
 def login():
@@ -20,8 +21,8 @@ def login():
         user = collection.find_one({'name': name, 'email': email})
 
         if user:
-            # 若存在該使用者，跳轉至 bar.html
-            return redirect(url_for('detect'))
+            # 若存在該使用者，跳轉至 about.html
+            return redirect(url_for('about.about'))
         else:
             # 若不存在，顯示錯誤訊息
             flash('登入失敗，請檢查您的名稱和電子郵件。')

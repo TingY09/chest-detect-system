@@ -235,6 +235,7 @@ tr:hover {
     width:900px;
 }
 
+
 /* 設定span的樣式，使其與input框保持一致 */
 span {
     display: block;
@@ -242,12 +243,7 @@ span {
     height: 100%;
 }
 
-.allResult{
-    display: flex;
-    justify-content: flex-end;
-    position: absolute;
-    left: 10%;
-    top:22%;
+    top:15%;
     flex: auto;
 }
 
