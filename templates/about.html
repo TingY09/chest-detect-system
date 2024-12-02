@@ -19,11 +19,11 @@
         <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"></a>
         <div class="system"><a>胸腔辨識系統</a></div>
         <ul class="drop-down-menu ">
-          <li><a class="nav-link dropdown-toggle show" href="{{ url_for('patient') }}" data-bs-toggle="dropdown"
+          <li><a class="nav-link dropdown-toggle show" href="{{ url_for('all.all') }}" data-bs-toggle="dropdown"
               aria-expanded="true">病患資料</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle show" href=".\pie chart.html" data-bs-toggle="dropdown"
-              aria-expanded="true">病患分類</a>
+              aria-expanded="true">疾病分類</a>
             <!-- <ul class="dropdown-menu show" data-bs-popper="static">
                     <li><a class="dropdown-item" href=".\pie chart.html">北部</a>
                     </li>
@@ -39,10 +39,10 @@
                   </ul> -->
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle show" href="{{ url_for('detect') }}" data-bs-toggle="dropdown"
+            <a class="nav-link dropdown-toggle show" href="{{ url_for('detect.detect') }}" data-bs-toggle="dropdown"
               aria-expanded="true">疾病辨識</a>
           </li>
-          <li><a class="nav-link dropdown-toggle show" href="{{ url_for('about') }}" data-bs-toggle="dropdown"
+          <li><a class="nav-link dropdown-toggle show" href="{{ url_for('about.about') }}" data-bs-toggle="dropdown"
               aria-expanded="true">About</a></li>
         </ul>
         <div class="search"><input type="text" placeholder="Search...">
