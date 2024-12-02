@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>da su ji</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="static/css/patient.css">
+</head>
+
+<body>
+  <header class="p-3 mb-3 border-bottom">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"></a>
+        <div class="system"><a>胸腔辨識系統</a></div>
+        <ul class="drop-down-menu ">
+          <li><a class="nav-link dropdown-toggle show" href="{{ url_for('patient') }}" data-bs-toggle="dropdown"
+              aria-expanded="true">病患資料</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle show" href=".\pie chart.html" data-bs-toggle="dropdown"
+              aria-expanded="true">病患分類</a>
+            <!-- <ul class="dropdown-menu show" data-bs-popper="static">
+                <li><a class="dropdown-item" href=".\pie chart.html">北部</a>
+                </li>
+                <li><a class="dropdown-item" href=".\pie chart.html">中部</a>
+
+                </li>
+                <li><a class="dropdown-item" href=".\pie chart.html">南部</a>
+
+                </li>
+                <li><a class="dropdown-item" href=".\pie chart.html">東部</a>
+
+                </li>
+              </ul> -->
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle show" href="{{ url_for('detect') }}" data-bs-toggle="dropdown"
+              aria-expanded="true">疾病辨識</a>
+          </li>
+          <li><a class="nav-link dropdown-toggle show" href="{{ url_for('about') }}" data-bs-toggle="dropdown"
+              aria-expanded="true">About</a></li>
+        </ul>
+        <div class="search"><input type="text" placeholder="Search...">
+          <button type="submit">Search</button>
+        </div>
+        <!-- <div class="doctor">
+            <ul><a>XXX醫生您好</a>
+            <button class="logout-button">登出</button></ul> -->
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="allResult">
+      <div class="pic">
+        <img class="patient-photo" src="static/assets/head-photo.jpg" alt="Uploaded Image" />
+      </div>
+      <div class="patient-sheet">
+        <div class="input-box">
+          <h2 style="text-align: center;" class="patient-data">病患資訊</h2>
+          <table>
+            <tbody>
+              <tr>
+                <td>姓名:</td>
+                <td><span class="patient-name"></span></td>
+                <td>身高:</td>
+                <td><span class="patient-height"></span></td>
+              </tr>
+              <tr>
+                <td>身分證字號:</td>
+                <td><span class="patient-ID-card-number"></span></td>
+                <td>體重:</td>
+                <td><span class="patient-weight"></span></td>
+              </tr>
+              <tr>
+                <td>生日:</td>
+                <td><span class="patient-birthday"></span></td>
+                <td>地址:</td>
+                <td><span class="patient-address"></span></td>
+              </tr>
+              <tr>
+                <td>疾病:</td>
+                <td colspan="3"><span class="patient-dicease"></span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="patient-button-container">
+        <button class="revise-button">修改資料</button>
+        <button class="patient-data-saved">儲存資料</button>
+      </div>
+    </div>
+
+    <script>
+      // // 當用戶選擇圖片後顯示該圖片，並顯示"辨識照片"按鈕
+      // document.getElementById('file-input').addEventListener('change', function (e) {
+      //   const fileField = e.target.files[0];
+
+      //   if (fileField) {
+      //     const reader = new FileReader();
+
+      //     reader.onload = function (event) {
+      //       // 顯示上傳的圖片
+      //       document.getElementById('uploaded-image').src = event.target.result;
+      //       document.getElementById('uploaded-image').style.display = "block";  // 顯示圖片
+      //       document.getElementById('predict-button').style.display = "block";  // 顯示辨識按鈕
+      //     };
+
+      //     reader.readAsDataURL(fileField);  // 讀取圖片並顯示
+      //   }
+      // });
+
+      // // 當用戶點擊"辨識照片"按鈕後向 Flask 發送請求，並顯示辨識結果
+      // document.getElementById('predict-button').onclick = async function () {
+      //   const formData = new FormData();
+      //   const fileField = document.getElementById('file-input').files[0];
+
+      //   formData.append('file', fileField);
+
+      //   // 向 Flask 後端發送請求
+      //   const response = await fetch('/predict', {
+      //     method: 'POST',
+      //     body: formData,
+      //   });
+
+      //   const data = await response.json();
+
+      //   // 更新並顯示辨識結果
+      //   document.getElementById('result').innerText = "辨識結果: " + data.result;
+      //   document.getElementById('result').style.display = "block";  // 顯示辨識結果
+      // };
+
+    // 獲取所有要修改的元素
+    const nameElement = document.querySelector(".patient-name");
+    const heightElement = document.querySelector(".patient-height");
+    const idElement = document.querySelector(".patient-ID-card-number");
+    const weightElement = document.querySelector(".patient-weight");
+    const birthdayElement = document.querySelector(".patient-birthday");
+    const addressElement = document.querySelector(".patient-address");
+    const diseaseElement = document.querySelector(".patient-dicease");
+
+    // 修改按鈕
+    const reviseButton = document.querySelector(".revise-button");
+    // 儲存按鈕
+    const saveButton = document.querySelector(".patient-data-saved");
+
+    // 當點擊 "修改資料" 按鈕時，將 span 替換為輸入框
+    reviseButton.addEventListener("click", () => {
+        nameElement.innerHTML = `<input type="text" id="name-input" value="${nameElement.textContent}">`;
+        heightElement.innerHTML = `<input type="number" id="height-input" value="${heightElement.textContent}">`;
+        idElement.innerHTML = `<input type="text" id="id-input" value="${idElement.textContent}">`;
+        weightElement.innerHTML = `<input type="number" id="weight-input" value="${weightElement.textContent}">`;
+        birthdayElement.innerHTML = `<input type="date" id="birthday-input" value="${birthdayElement.textContent}">`;
+        addressElement.innerHTML = `<input type="text" id="address-input" value="${addressElement.textContent}">`;
+        diseaseElement.innerHTML = `<input type="text" id="disease-input" value="${diseaseElement.textContent}">`;
+    });
+
+    // 當點擊 "儲存資料" 按鈕時，將輸入框的值保存回原來的欄位
+    saveButton.addEventListener("click", () => {
+        const newName = document.getElementById("name-input").value;
+        const newHeight = document.getElementById("height-input").value;
+        const newId = document.getElementById("id-input").value;
+        const newWeight = document.getElementById("weight-input").value;
+        const newBirthday = document.getElementById("birthday-input").value;
+        const newAddress = document.getElementById("address-input").value;
+        const newDisease = document.getElementById("disease-input").value;
+
+        // 將新值放回
+        nameElement.textContent = newName;
+        heightElement.textContent = newHeight;
+        idElement.textContent = newId;
+        weightElement.textContent = newWeight;
+        birthdayElement.textContent = newBirthday;
+        addressElement.textContent = newAddress;
+        diseaseElement.textContent = newDisease;
+
+        // 這裡可以發送資料到後端，例如使用 fetch API
+        // const data = {
+        //   name: newName,
+        //   id: newId,
+        //   height: newHeight,
+        //   weight: newWeight,
+        //   address: newAddress,
+        //   disease: newDisease,
+        //   birthday: newBirthday
+        // };
+        // fetch('/save-patient-data', {
+        //   method: 'POST',
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //   },
+        //   body: JSON.stringify(data),
+        // });
+    });
+    </script>
+  </main>
+  <footer class="py-5">
+    <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+      <p id="foot">© 2024 Hsin-Mei Chang and Ting-Yu Ye, National Kaohsiung Normal University, Taiwan, Inc. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+
+</html>
