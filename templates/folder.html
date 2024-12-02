@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>da su ji</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="static/css/folder.css">
+</head>
+
+<body>
+  <header class="p-3 mb-3 border-bottom">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"></a>
+        <div class="system"><a>胸腔辨識系統</a></div>
+        <ul class="drop-down-menu ">
+          <li><a class="nav-link dropdown-toggle show" href="{{ url_for('all.all') }}" data-bs-toggle="dropdown"
+              aria-expanded="true">病患資料</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle show" href=".\pie chart.html" data-bs-toggle="dropdown"
+              aria-expanded="true">疾病分類</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle show" href="{{ url_for('detect.detect') }}" data-bs-toggle="dropdown"
+              aria-expanded="true">疾病辨識</a>
+          </li>
+          <li><a class="nav-link dropdown-toggle show" href="{{ url_for('about.about') }}" data-bs-toggle="dropdown"
+              aria-expanded="true">About</a></li>
+        </ul>
+        <div class="search"><input type="text" placeholder="Search...">
+          <button type="submit">Search</button>
+        </div>
+        <!-- <div class="doctor">
+            <ul><a>XXX醫生您好</a>
+            <button class="logout-button">登出</button></ul> -->
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="folder-container" id="folder-container">
+        <!-- 預設資料夾可以放在這裡 -->
+        <div class="folder">
+          <a href="{{ url_for('patient.get_patient_data', name='Tom') }}"><img src="static/assets/R.png"
+              alt="folder image">Tom</a>
+        </div>
+      </div>
+    </div>
+    <!-- + 按鈕 -->
+    <button class="add-folder-btn" id="add-folder-btn">&#43;</button>
+  </main>
+
+  <footer class="py-5">
+    <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+      <p id="foot">© 2024 Hsin-Mei Chang and Ting-Yu Ye, National Kaohsiung Normal University, Taiwan, Inc. All rights
+        reserved.</p>
+    </div>
+  </footer>
+  <script>
+    const addFolderBtn = document.getElementById('add-folder-btn');
+    const folderContainer = document.getElementById('folder-container');
+
+    addFolderBtn.addEventListener('click', () => {
+      const folderName = prompt("請輸入資料夾名稱：");
+
+      if (folderName) {
+        const newFolder = document.createElement('div');
+        newFolder.classList.add('folder');
+
+        const folderLink = document.createElement('a');
+        folderLink.href = `/patient/${folderName}`; // 根據資料夾名稱設置對應頁面的連結
+
+        const folderImage = document.createElement('img');
+        folderImage.src = 'static/assets/R.png';
+        folderImage.alt = '資料夾圖片';
+
+        const folderText = document.createElement('p');
+        folderText.innerText = folderName;
+
+        folderLink.appendChild(folderImage);
+        folderLink.appendChild(folderText);
+        newFolder.appendChild(folderLink);
+
+        folderContainer.appendChild(newFolder);
+      }
+    });
+
+  </script>
+
+</body>
+
+</html>
