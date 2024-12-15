@@ -1,27 +1,80 @@
 /* styles.css */
-.container {  /* header */
-    width: 35%; /* 這裡可以設置你需要的寬度 */
-    margin-left: 30%; /* 左側保留 10% 的空間 */
-    margin-right: auto; /* 右側自動縮放，讓它偏左 */
+.container {
+    /* header */
+    width: 100%;
+    /* 這裡可以設置你需要的寬度 */
+    margin-left: 30%;
+    /* 左側保留 10% 的空間 */
+    margin-right: auto;
+    /* 右側自動縮放，讓它偏左 */
 }
-  
-.search{  /* 搜尋鍵 */
-    position: absolute;  /* 絕對位置 */
-    left: 67%; /* 貼齊畫面最左 */
-    width: 50%; /* 根據需求設置寬度 */
+
+.headAll {
+    /* header */
+    width: 100%;
+    /* 這裡可以設置你需要的寬度 */
+    margin-left: 30%;
+    /* 左側保留 10% 的空間 */
+    margin-right: auto;
+    /* 右側自動縮放，讓它偏左 */
+    display: flex;
+    align-items: center;  /* 垂直居中對齊 */
+    justify-content: space-between;  /* 右對齊 */
+    padding: 10px 5%;
 }
-  
-.doctor{
+
+.message-logout{
+    display: flex;
+    align-items: center;  /* 垂直居中對齊 */
+    margin-left: auto;  /*Push to the far right*/
+}
+
+
+.welcome-message {
+    font-size: 18px;
+    margin-left: 10px;
+}
+
+.logout .btn {
+    position: absolute; /* 確保按鈕浮動在頂部 */
+    
+    top: 28.3%; /* 與頂部對齊 */
+    font-size: 20px;
+    height: 37.5px;
+    width: 76px;
+    background-color: #398282;
+    color: #ffffff;
+    border: #398282;
+}
+
+
+.system {
+    /* 系統標題 */
     position: absolute;
-    left: 85%; /* 貼齊畫面最左 */
-    width: 50%; /* 根據需求設置寬度 */
-}
-  
-.system{  /* 系統標題 */
-    position: absolute;
-    left: 10%; /* 貼齊畫面最左 */
-    width: 50%; /* 根據需求設置寬度 */
+    left: 10%;
+    /* 貼齊畫面最左 */
+    width: 50%;
+    /* 根據需求設置寬度 */
     font-size: 25px;
+    flex: 1;  /* Allow it to grow to fill the left side */
+}
+
+.bi {
+    vertical-align: -.125em;
+    fill: currentColor;
+}
+
+.nav {
+    flex: 2;  /* Allow nav to center in the middle */
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    padding-bottom: 1rem;
+    margin-top: -1px;
+    overflow-x: auto;
+    text-align: center;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
 }
 
 
@@ -138,17 +191,27 @@ ul.drop-down-menu ul li:hover > ul { /* 第二層之後的選單展開位置*/
     display: block !important;
 }
   
-html, body { 
+html, body {
     height: 100%;
-    width:100%;
-    padding: 0;
     margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden; /* 禁止左右滾動 */
+    background: #e0fffa;
 }
 
-body {
-    background: #e0fffa;
-    overflow: hidden;
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #e0fffa;
+    z-index: 1000; /* 保證header在最上層 */
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
 }
+
+
 
 /* 表格 */
 table {
@@ -238,16 +301,20 @@ tr:hover {
 .allResult{
     display: flex;
     justify-content: flex-end;
-    position: absolute;
-    left: 10%;
+    position: relative;
+    right:8%;
     top:15%;
     flex: auto;
 }
 
-.py-5 {
-    position: fixed;
-    top: 80%;
+footer {
     width: 100%;
+    height:20%;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #e0fffa;
+    font-size: 14px;
+    bottom: 0;
 }
 
  /* patient page */  
@@ -275,12 +342,14 @@ tr:hover {
     height:20%;
     /* display: flex; */
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 5%;
     margin-top:2%;
+    z-index: 10;
 }
 
 .revise-button, .patient-data-saved {
-    margin-top:33%;
+    z-index: 5;
+    margin-top:28%;
     margin-right:10%;
     display: inline-block;
     padding: 10px 20px;
@@ -296,3 +365,106 @@ tr:hover {
     background-color: #339999;
     color: white;
 }
+
+/* check-year-list */
+.check-years-list {
+    margin: 5% auto;
+    margin-left:15%;
+    text-align: center; /* 將選單置中 */
+    height: 5%;
+}
+
+.check-years-list select {
+    width: 200px; /* 設置選單的寬度 */
+    padding: 5px; /* 增加內部間距 */
+    border-radius: 5px; /* 圓角效果 */
+    border: 1px solid #ccc; /* 邊框顏色 */
+    font-size: 16px; /* 調整字體大小 */
+}
+.type-column{
+    margin-top:2%;
+    margin-left:2%;
+}
+.check-years-list select:hover {
+    border-color: #60d9d9; /* 當滑鼠懸停時改變邊框顏色 */
+}
+.check-years-list select:focus {
+    outline: none; /* 移除默認的 outline */
+    border-color: #339999; /* 當獲得焦點時改變邊框顏色 */
+    box-shadow: 0 0 5px rgba(51, 153, 153, 0.5); /* 增加陰影效果 */
+}
+.owl-theme .item {
+    height: 28rem;
+    background: #4dc7a0;
+    padding: 1rem;
+  }
+.type-column-1 {
+    position: static; /* 確保其子元素不受限制 */
+}
+
+main {
+    flex: 1;
+    margin-top: 60px; /* 確保主內容區域不會與header重疊 */
+    padding: 20px;
+}  
+.owl-carousel .item h4 {
+    color: #fff;
+    font-weight: 400;
+    font-size: 1.4375rem;
+    margin-top: 0rem;
+}
+.owl-carousel {
+    padding-top: 8%; /* 調整這個值 */
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+}
+.owl-nav button {
+    margin-top:50px;
+    font-size: 30px;      /* 增大字體 */
+    width: 30px;          /* 增大按鈕寬度 */
+    height: 50px;         /* 增大按鈕高度 */
+    line-height: 50px;    /* 調整行高，確保內容垂直居中 */
+    background-color: #339999;
+}
+.owl-nav button span {
+    font-size: 40px;   /* 調整字體大小 */
+    color: #339999;    /* 設置字體顏色，根據需求調整 */
+}
+.owl-nav button span :hover{
+    font-size: 40px;   /* 調整字體大小 */
+    color: #2e8888;    /* 設置字體顏色，根據需求調整 */
+}
+
+.owl-prev {
+    left: -50px;  /* 調整按鈕位置（可選） */
+}
+
+.owl-next {
+    right: -50px;  /* 調整按鈕位置（可選） */
+}
+
+.diseasePic {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .diseasePic {
+    position: relative;
+    width: 100%; /* 調整圖片寬度 */
+    height: 100%; /* 調整圖片高度 */
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .diseasePic:hover {
+    transform: scale(1.05); /* 懸停時放大圖片 */
+  }
+
+  .disease-overlay{
+    margin-top:10px;
+    font-size: 20px;      /* 增大字體 */
+  }

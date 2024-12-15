@@ -4,13 +4,12 @@ from torchvision import transforms
 from PIL import Image
 import io
 import base64
-
 # 定義一個 Blueprint
 predict_bp = Blueprint('predict', __name__)
 
 # 直接載入包含模型架構和權重的 .pth 檔案
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-model = torch.load('model.pth', map_location=device)
+model = torch.load('train3modelefficientnet_b720.pth', map_location=device)
 model.eval()  # 設置為評估模式
 
 # 定義 15 種類別

@@ -5,11 +5,11 @@ from pymongo import MongoClient
 update_bp = Blueprint('update', __name__)
 
 # MongoDB 連線 (請根據需求調整)
-client = MongoClient('mongodb://localhost:27017/')
+client = MongoClient('mongodb://127.0.0.1:27017/')
 db = client['patient']  # 使用你的資料庫名稱
 collection = db['data']  # 使用你的集合名稱
 
-@update_bp.route('/update-patient', methods=['POST'])
+@update_bp.route('/api/update-patient', methods=['POST'])
 def update_patient():
     data = request.get_json()
     
@@ -44,6 +44,3 @@ def update_patient():
         return jsonify({'status': 'success'})
     else:
         return jsonify({'status': 'error', 'message': '資料未更新'})
-
-
-

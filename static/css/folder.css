@@ -9,23 +9,44 @@
     /* 右側自動縮放，讓它偏左 */
 }
 
-.search {
-    /* 搜尋鍵 */
-    position: absolute;
-    /* 絕對位置 */
-    left: 67%;
-    /* 貼齊畫面最左 */
-    width: 50%;
-    /* 根據需求設置寬度 */
+.headAll {
+    /* header */
+    width: 100%;
+    /* 這裡可以設置你需要的寬度 */
+    margin-left: 30%;
+    /* 左側保留 10% 的空間 */
+    margin-right: auto;
+    /* 右側自動縮放，讓它偏左 */
+    display: flex;
+    align-items: center;  /* 垂直居中對齊 */
+    justify-content: space-between;  /* 右對齊 */
+    padding: 10px 5%;
 }
 
-.doctor {
-    position: absolute;
-    left: 85%;
-    /* 貼齊畫面最左 */
-    width: 50%;
-    /* 根據需求設置寬度 */
+.message-logout{
+    display: flex;
+    align-items: center;  /* 垂直居中對齊 */
+    margin-left: auto;  /*Push to the far right*/
 }
+
+
+.welcome-message {
+    font-size: 18px;
+    margin-left: 10px;
+}
+
+.logout .btn {
+    position: absolute; /* 確保按鈕浮動在頂部 */
+    
+    top: 28.3%; /* 與頂部對齊 */
+    font-size: 20px;
+    height: 37.5px;
+    width: 76px;
+    background-color: #398282;
+    color: #ffffff;
+    border: #398282;
+}
+
 
 .system {
     /* 系統標題 */
@@ -35,6 +56,7 @@
     width: 50%;
     /* 根據需求設置寬度 */
     font-size: 25px;
+    flex: 1;  /* Allow it to grow to fill the left side */
 }
 
 .bi {
@@ -43,7 +65,9 @@
 }
 
 .nav {
+    flex: 2;  /* Allow nav to center in the middle */
     display: flex;
+    justify-content: center;
     flex-wrap: nowrap;
     padding-bottom: 1rem;
     margin-top: -1px;
@@ -517,7 +541,7 @@ tr:hover {
 }
 
 .folder {
-    right:20%;
+    right:25%;
     width: 18%; /* 確保每行最多顯示五個資料夾，五個資料夾加間距約為 100% */
     height: auto;
     display: flex;
@@ -535,10 +559,10 @@ tr:hover {
 .add-folder-btn {
     position: fixed;
     bottom: 13%;
-    right: 20px;
+    right: 5%;
     width: 60px;
     height: 60px;
-    background-color: #339999;
+    background-color: #398282;
     color: rgb(255, 255, 255);
     border: none;
     border-radius: 50%;

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>da su ji</title>
+  <title>Chest Detect System</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -13,30 +13,34 @@
 
 <body>
   <header class="p-3 mb-3 border-bottom">
-    <div class="container">
+    <div class="headAll">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"></a>
         <div class="system"><a>胸腔辨識系統</a></div>
         <ul class="drop-down-menu ">
           <li><a class="nav-link dropdown-toggle show" href="{{ url_for('all.all') }}" data-bs-toggle="dropdown"
-              aria-expanded="true">病患資料</a></li>
+              aria-expanded="true">病患總覽</a></li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle show" href=".\pie chart.html" data-bs-toggle="dropdown"
-              aria-expanded="true">疾病分類</a>
+            <a class="nav-link dropdown-toggle show" href="{{ url_for('diseaseAll.diseaseAll') }}"
+              data-bs-toggle="dropdown" aria-expanded="true">疾病分類</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle show" href="{{ url_for('detect.detect') }}" data-bs-toggle="dropdown"
               aria-expanded="true">疾病辨識</a>
           </li>
           <li><a class="nav-link dropdown-toggle show" href="{{ url_for('about.about') }}" data-bs-toggle="dropdown"
-              aria-expanded="true">About</a></li>
+              aria-expanded="true">醫院公告</a></li>
         </ul>
-        <div class="search"><input type="text" placeholder="Search...">
-          <button type="submit">Search</button>
+        <div class="message-logout">
+          {% if username %}
+          <div class="welcome-message">
+            <span>{{ username }}，您好！</span>
+          </div>
+          {% endif %}
+          <div class="logout">
+            <a href="{{ url_for('logout.logout') }}" class="btn btn-danger">登出</a>
+          </div>
         </div>
-        <!-- <div class="doctor">
-            <ul><a>XXX醫生您好</a>
-            <button class="logout-button">登出</button></ul> -->
       </div>
     </div>
   </header>
@@ -44,14 +48,20 @@
   <main>
     <div class="container">
       <div class="folder-container" id="folder-container">
-        <!-- 預設資料夾可以放在這裡 -->
+        <!-- 循環顯示病患資料 -->
+        {% for patient in patients %}
         <div class="folder">
-          <a href="{{ url_for('patient.get_patient_data', name='Tom') }}"><img src="static/assets/R.png"
-              alt="folder image">Tom</a>
+          <!-- 連結到 patient.html 並傳遞 id_card_number -->
+          <a href="{{ url_for('patient_page.patient_page', id_card_number=patient['id_card_number']) }}">
+            <img src="static/assets/R.png" alt="folder image">
+            <p>{{ patient['id_card_number'] }}</p>
+          </a>
         </div>
+        {% endfor %}
       </div>
     </div>
-    <!-- + 按鈕 -->
+
+    <!-- 添加資料夾按鈕 -->
     <button class="add-folder-btn" id="add-folder-btn">&#43;</button>
   </main>
 
@@ -61,6 +71,7 @@
         reserved.</p>
     </div>
   </footer>
+
   <script>
     const addFolderBtn = document.getElementById('add-folder-btn');
     const folderContainer = document.getElementById('folder-container');
@@ -69,28 +80,56 @@
       const folderName = prompt("請輸入資料夾名稱：");
 
       if (folderName) {
-        const newFolder = document.createElement('div');
-        newFolder.classList.add('folder');
+        fetch('/add_folder', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ id_card_number: folderName })  // 以 JSON 格式傳送資料夾名稱作為 id card number
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.message === '成功新增資料夾') {
+              // 創建並附加新資料夾元素
+              const newFolder = document.createElement('div');
+              newFolder.classList.add('folder');
 
-        const folderLink = document.createElement('a');
-        folderLink.href = `/patient/${folderName}`; // 根據資料夾名稱設置對應頁面的連結
+              const folderLink = document.createElement('a');
+              folderLink.href = `/patient/${folderName}`;  // 更新連結格式
+              folderLink.setAttribute('data-id', folderName);
 
-        const folderImage = document.createElement('img');
-        folderImage.src = 'static/assets/R.png';
-        folderImage.alt = '資料夾圖片';
+              const folderImage = document.createElement('img');
+              folderImage.src = 'static/assets/R.png';
+              folderImage.alt = '資料夾圖片';
 
-        const folderText = document.createElement('p');
-        folderText.innerText = folderName;
+              const folderText = document.createElement('p');
+              folderText.innerText = folderName;
 
-        folderLink.appendChild(folderImage);
-        folderLink.appendChild(folderText);
-        newFolder.appendChild(folderLink);
+              folderLink.appendChild(folderImage);
+              folderLink.appendChild(folderText);
+              newFolder.appendChild(folderLink);
 
-        folderContainer.appendChild(newFolder);
+              folderContainer.appendChild(newFolder);
+
+              // 動態綁定點擊事件
+              folderLink.addEventListener('click', (e) => {
+                e.preventDefault();  // 防止默認行為
+                window.location.href = folderLink.href;  // 導向資料夾頁面
+              });
+
+            } else {
+              alert('新增資料夾失敗');
+            }
+          })
+          .catch(error => {
+            console.error('錯誤:', error);
+            alert('新增資料夾時發生錯誤');
+          });
       }
     });
 
   </script>
+
 
 </body>
 

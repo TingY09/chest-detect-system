@@ -1,0 +1,107 @@
+/* login page */
+
+.login-container {
+    /* background-color: white; */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    position: absolute;
+    left: 36%;
+    bottom: 40%;
+    margin-top: 40%;
+
+}
+
+.login-container h2 {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.input-group input {
+    width: 90%;
+    position: relative;
+    left: 6%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-container button {
+    width: 90%;
+    position: relative;
+    left: 6%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-container button:hover {
+    background-color: #0056b3;
+}
+
+/* patient page */
+
+
+.patient-photo {
+    margin-top: 20px;
+    margin-left: 50px;
+    width: 280px;
+    height: 300px;
+}
+
+.input-box {
+    overflow: hidden;
+    /* 清除浮動 */
+}
+
+.patient-sheet {
+    margin-top: 80px;
+
+}
+
+.patient-button-container {
+    position: absolute;
+    left: 68%;
+    top: 0%;
+    margin: 5px auto;
+    width: 80%;
+    /* display: flex; */
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.revise-button,
+.patient-data-saved {
+    margin-top: 33%;
+    margin-right: 10%;
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #60d9d9;
+    color: black;
+    border-radius: 5px;
+    font-size: 16px;
+    border: none;
+    /* 移除邊框 */
+}
+
+.revise-button:hover,
+.patient-data-saved:hover {
+    background-color: #339999;
+    color: white;
+}
